@@ -37,29 +37,39 @@ public class Wumpus extends Rooms{
         }
         else System.out.println("You hit nothing.");
     }
-
+   static int [] hazardRooms= {};	
+	
     static int wumpusRoom() {
         int wumpusRoom = (int) (2 + (8 * Math.random()));
+	    hazardRooms[0]=wumpusRoom;
         return wumpusRoom;
     }
 
     static int spiderRoom() {
         int spiders = (int) (2 + (8 * Math.random()));
+	    if(spiders!=hazardRooms[0])
+		    hazardRooms[1]=spiders;
         return spiders;
     }
 
     static int spiderRoomTwo() {
         int secondSpiders = (int) (2 + (8 * Math.random()));
+	     if(secondSpiders!=hazardRooms[1])
+		    hazardRooms[2]=secondSpiders;
         return secondSpiders;
     }
 
     static int darkPit() {
         int pit = (int) (2 + (8 * Math.random()));
+	    if(pit!=hazardRooms[2])
+		    hazardRooms[3]=pit;
         return pit;
     }
 
     static int darkPitTwo() {
         int secondPit = (int) (2 + (8 * Math.random()));
+	     if(secondPit!=hazardRooms[3])
+		    hazardRooms[4]=secondPit;
         return secondPit;
     }
 
