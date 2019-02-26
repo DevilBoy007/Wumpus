@@ -30,13 +30,22 @@ public class Wumpus extends Rooms{
         else {System.out.println("You can only get to rooms through the connecting tunnels\n"); return x;}
     }
 
-    static void shoot(boolean f, Rooms[] x, int y, int z){
-        if(x[z - 1].isAdj(y)){
-            System.out.println("You hit the Wumpus!! Congratulations, the locals have heard the news and wish" +
-                    " to make you their new king.");
-        }
-        else System.out.println("You hit nothing.");
+    static boolean shoot(int wump, int target){
+	    if(target==wump){
+		    System.out.println("Congratulations!! You hit the Wumpus");
+		    System.out.println("The local villagers have heard the good news and wish to make you their new king");
+		    return false;
+	    }
+		    else System.out.println("You hit nothing."); return false;
     }
+	
+   static boolean isRepeating(int[] a, int x){
+	   for(int i = 0; i<a.length; i++){
+		   if(x==a[i])
+			   return true;
+	   }
+		   return false;
+	}
    static int [] hazardRooms= {};	
 	
     static int wumpusRoom() {
@@ -47,29 +56,33 @@ public class Wumpus extends Rooms{
 
     static int spiderRoom() {
         int spiders = (int) (2 + (8 * Math.random()));
-	    if(spiders!=hazardRooms[0])
-		    hazardRooms[1]=spiders;
+	    if(spiders.isRepeating())
+		spiders = (int) (2 + (8 * Math.random()));
+	hazardRooms[1]=spiders;
         return spiders;
     }
 
     static int spiderRoomTwo() {
         int secondSpiders = (int) (2 + (8 * Math.random()));
-	     if(secondSpiders!=hazardRooms[1])
-		    hazardRooms[2]=secondSpiders;
+	     if(secondSpiders.isRepeating())
+		    secondSpiders = (int) (2 + (8 * Math.random()));
+	hazardRooms[2]=secondSpiders;
         return secondSpiders;
     }
 
     static int darkPit() {
         int pit = (int) (2 + (8 * Math.random()));
-	    if(pit!=hazardRooms[2])
-		    hazardRooms[3]=pit;
+	    if(pit.isRepeating())
+		    pit = (int) (2 + (8 * Math.random()));
+	hazardRooms[3]=pit;
         return pit;
     }
 
     static int darkPitTwo() {
         int secondPit = (int) (2 + (8 * Math.random()));
-	     if(secondPit!=hazardRooms[3])
-		    hazardRooms[4]=secondPit;
+	     if(secondPit.isRepeating())
+		   secondPit = (int) (2 + (8 * Math.random()));
+	hazardRooms[4]=secondPit;
         return secondPit;
     }
 
@@ -119,11 +132,20 @@ public class Wumpus extends Rooms{
             if (user.equalsIgnoreCase("m")) {
                 System.out.println("Which room would you like to move to?");
                 nextRoom = cin.nextInt();
-                System.out.println("Room " + room);
                 room = move(roomDetails,room, nextRoom);
             }
             else if(user.equalsIgnoreCase("s")){
-                shoot(isPlaying, arrows, roomDetails, wumpusRoom, room);
+		    if(a==0)
+		System.out.println("You have no arrows!!")
+		else
+			arrows--;
+			System.out.println("Which room would you like to shoot into?");
+			System.out.println(roomDetails[room-1].getAdj1() + " " + roomDetails[room-1].getAdj2() + " " + roomDetails[room-1].getAdj3);
+		    nextRoom=cin.nextInt();
+		    if(!(roomDetails[room-1].isAdj(nextRoom)))
+			    System.out.println("You can only shoot into rooms that you are next to... obviously");
+		    else
+                	isPlaying = shoot(wumpusRoom, nextRoom);
         }
 		}
     }
