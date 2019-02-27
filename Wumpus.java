@@ -36,7 +36,7 @@ public class Wumpus extends Rooms{
 		    System.out.println("The local villagers have heard the good news and wish to make you their new king");
 		    return false;
 	    }
-		    else System.out.println("You hit nothing."); return false;
+		    else System.out.println("You hit nothing."); return true;
     }
 	
    static boolean isRepeating(int[] a, int x){
@@ -46,7 +46,7 @@ public class Wumpus extends Rooms{
 	   }
 		   return false;
 	}
-   static int [] hazardRooms= {};	
+   static int [] hazardRooms=new int[5];	
 	
     static int wumpusRoom() {
         int wumpusRoom = (int) (2 + (8 * Math.random()));
@@ -56,42 +56,41 @@ public class Wumpus extends Rooms{
 
     static int spiderRoom() {
         int spiders = (int) (2 + (8 * Math.random()));
-	    if(spiders.isRepeating())
-		spiders = (int) (2 + (8 * Math.random()));
+	    while(isRepeating(hazardRooms, spiders))
+		{spiders = (int) (2 + (8 * Math.random()));}
 	hazardRooms[1]=spiders;
         return spiders;
     }
 
     static int spiderRoomTwo() {
         int secondSpiders = (int) (2 + (8 * Math.random()));
-	     if(secondSpiders.isRepeating())
-		    secondSpiders = (int) (2 + (8 * Math.random()));
+	     while(isRepeating(hazardRooms, secondSpiders))
+		    {secondSpiders = (int) (2 + (8 * Math.random()));}
 	hazardRooms[2]=secondSpiders;
         return secondSpiders;
     }
 
     static int darkPit() {
         int pit = (int) (2 + (8 * Math.random()));
-	    if(pit.isRepeating())
-		    pit = (int) (2 + (8 * Math.random()));
+	    while(isRepeating(hazardRooms, pit))
+		    {pit = (int) (2 + (8 * Math.random()));}
 	hazardRooms[3]=pit;
         return pit;
     }
 
     static int darkPitTwo() {
         int secondPit = (int) (2 + (8 * Math.random()));
-	     if(secondPit.isRepeating())
-		   secondPit = (int) (2 + (8 * Math.random()));
+	     while(isRepeating(hazardRooms, secondPit))
+		   {secondPit = (int) (2 + (8 * Math.random()));}
 	hazardRooms[4]=secondPit;
         return secondPit;
     }
 
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws IOException{
 
         Scanner cin = new Scanner(System.in);
         Scanner roomFile;
         roomFile = new Scanner(new FileReader("wumpusText.txt"));
-
         int numRoom = roomFile.nextInt();
 
         Rooms[] roomDetails;
@@ -135,12 +134,12 @@ public class Wumpus extends Rooms{
                 room = move(roomDetails,room, nextRoom);
             }
             else if(user.equalsIgnoreCase("s")){
-		    if(a==0)
-		System.out.println("You have no arrows!!")
+		    if(arrows==0)
+		System.out.println("You have no arrows!!");
 		else
 			arrows--;
 			System.out.println("Which room would you like to shoot into?");
-			System.out.println(roomDetails[room-1].getAdj1() + " " + roomDetails[room-1].getAdj2() + " " + roomDetails[room-1].getAdj3);
+			System.out.println(roomDetails[room-1].getAdj1() + " " + roomDetails[room-1].getAdj2() + " " + roomDetails[room-1].getAdj3());
 		    nextRoom=cin.nextInt();
 		    if(!(roomDetails[room-1].isAdj(nextRoom)))
 			    System.out.println("You can only shoot into rooms that you are next to... obviously");
