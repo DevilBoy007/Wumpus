@@ -4,22 +4,24 @@ import java.math.*;
 public class Wumpus extends Rooms{
     public Wumpus(Scanner roomFile) {
         super(roomFile);
+        /*Jellyfish are spiders
+         * Rock Bottom is pit
+         * Mr Krabs and Formula is wumpus
+         * special weapon is arrows
+	 *reskin still unfinished
+         */
     }
 
     static void dangerous(Rooms x, int a, int b, int c, int d, int e){
-        if (x.isAdj(a)) System.out.println("Room " + a + " reeks of Wumpus");
-        if (x.isAdj(b)) System.out.println("There's a faint click coming from " +
+        if (x.isAdj(a)) System.out.println("Room " + a + " reeks of Krabs and his money");
+        if (x.isAdj(b)) System.out.println("There's a faint buzzing coming from " +
                 "room " + b);
-        if (x.isAdj(c)) System.out.println("There's a faint click coming from " +
+        if (x.isAdj(c)) System.out.println("There's a faint buzzing coming from " +
                 "room " + c);
-        if (x.isAdj(d)) System.out.println("Room " + d + " sounds cavernous");
-        if (x.isAdj(e)) System.out.println("Room " + e + " sounds cavernous");
+        if (x.isAdj(d)) System.out.println("You hear the distant sound of tongue raspberries from Room " + d);
+        if (x.isAdj(e)) System.out.println("You hear the distant sound of tongue raspberries from Room " + e);
     }
-
-    //static boolean isSafe(Rooms x, int a, int b, int c, int d, int e){
-      //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
-    //}
-
+   
     static int move(Rooms[] a,int x, int y){
         if (y == a[x - 1].getAdj1())
             return y;
@@ -32,8 +34,8 @@ public class Wumpus extends Rooms{
 
     static boolean shoot(int wump, int target){
 	    if(target==wump){
-		    System.out.println("Congratulations!! You hit the Wumpus");
-		    System.out.println("The local villagers have heard the good news and wish to make you their new king");
+		    System.out.println("Congratulations!! You finally beat Krabs and have the Krabby Patty Formula");
+		    System.out.println("The Chum Bucket has become the most popular restaurant in Bikini Bottom");
 		    return false;
 	    }
 		    else System.out.println("You hit nothing."); return true;
@@ -86,6 +88,14 @@ public class Wumpus extends Rooms{
         return secondPit;
     }
 
+    /*static boolean isSafe(Rooms x, int [] hazardRooms, int currentRoom){
+    	if(currentRoom==hazardRooms[]) return false;
+    	System.out.println("You died");
+    	else
+    		return true;
+        //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
+      }
+      */
     public static void main(String[] args) throws IOException{
 
         Scanner cin = new Scanner(System.in);
@@ -115,13 +125,13 @@ public class Wumpus extends Rooms{
         darkPit();
         darkPitTwo();
         boolean isPlaying=true;
-		System.out.println("The Evil Wumpus has been terrorizing the local village,");
-		System.out.println("You must locate and slay the beast in it's cave lair!\n");
-		System.out.println("You have been equipped with a special bow that allows you to fire three of your " +
-                "arrows at once in different directions.");
+		System.out.println("Mr Krabs has led Bikini Bottom's restaurant scene for too long,");
+		System.out.println("You, Sheldon Plankton, must locate and defeat Krabs and claim the formula!\n");
+		System.out.println("You have created a special weapon that will finally allow you to " +
+                "DESTROY Krabs and take the Krabby Patty Formula,\nbut it only has enough energy for 3 uses.");
 		while(isPlaying) {
 		    if(room==wumpusRoom) isPlaying=false;
-            System.out.println("You have " + arrows + " arrows.");
+            System.out.println("You have " + arrows + " charges left.");
             System.out.println("You are in room " + roomDetails[room - 1].getNum() + ".\n");
             System.out.println(roomDetails[room - 1].getText());
             System.out.println("There are tunnels leading to rooms " + roomDetails[room - 1].getAdj1() + ", " + roomDetails[room - 1].getAdj2() + ", and " + roomDetails[room - 1].getAdj3());
@@ -135,7 +145,7 @@ public class Wumpus extends Rooms{
             }
             else if(user.equalsIgnoreCase("s")){
 		    if(arrows==0)
-		System.out.println("You have no arrows!!");
+		System.out.println("The weapon's out of energy!!");
 		else
 			arrows--;
 			System.out.println("Which room would you like to shoot into?");
