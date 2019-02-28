@@ -8,7 +8,6 @@ public class Wumpus extends Rooms{
          * Rock Bottom is pit
          * Mr Krabs and Formula is wumpus
          * special weapon is arrows
-	 *reskin still unfinished
          */
     }
 
@@ -88,14 +87,28 @@ public class Wumpus extends Rooms{
         return secondPit;
     }
 
-    /*static boolean isSafe(Rooms x, int [] hazardRooms, int currentRoom){
-    	if(currentRoom==hazardRooms[]) return false;
-    	System.out.println("You died");
-    	else
-    		return true;
+    static boolean isSafe(int [] hazardRooms, int currentRoom, boolean playing){
+    	//for(int i=0;i<hazardRooms.length;i++)
+    	System.out.println(" ");
+    	if(currentRoom==hazardRooms[0])
+    	{System.out.println("Eugene heard you fumbling around beneath him and stepped on you like the vermin you are.");
+    		playing = false;
+    	}
+    	if(currentRoom==hazardRooms[1]||currentRoom==hazardRooms[2])
+    	{System.out.println("You walked into a room full of jellyfish and got electrecuted.. underwater.. imagine that");
+    		playing = false;
+    	}
+    	if(currentRoom==hazardRooms[3]||currentRoom==hazardRooms[4])
+    	{System.out.println("You *pfft* fell *pfft* into *pfft* Rock *pfft* Bottom, *pfft* next *pfft* bus *pfft* leaves *pfft* never *pfft*");
+    		playing = false;
+    	}
+    	
+    	return playing;
+    	
+    }
         //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
-      }
-      */
+      
+      
     public static void main(String[] args) throws IOException{
 
         Scanner cin = new Scanner(System.in);
@@ -130,7 +143,6 @@ public class Wumpus extends Rooms{
 		System.out.println("You have created a special weapon that will finally allow you to " +
                 "DESTROY Krabs and take the Krabby Patty Formula,\nbut it only has enough energy for 3 uses.");
 		while(isPlaying) {
-		    if(room==wumpusRoom) isPlaying=false;
             System.out.println("You have " + arrows + " charges left.");
             System.out.println("You are in room " + roomDetails[room - 1].getNum() + ".\n");
             System.out.println(roomDetails[room - 1].getText());
@@ -142,6 +154,7 @@ public class Wumpus extends Rooms{
                 System.out.println("Which room would you like to move to?");
                 nextRoom = cin.nextInt();
                 room = move(roomDetails,room, nextRoom);
+                isPlaying=isSafe(hazardRooms, room, isPlaying);
             }
             else if(user.equalsIgnoreCase("s")){
 		    if(arrows==0)
