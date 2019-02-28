@@ -39,6 +39,7 @@ public class Wumpus extends Rooms{
         if(target==wump){
             System.out.println("Ravioli! Ravioli! You got the formuoli!");
             System.out.println("The Chum Bucket has become the most popular restaurant in Bikini Bottom");
+            System.out.println("Victory Screeeech! *ulululululululululululululu*");
             return false;
         }
         else System.out.println("You hit nothing."); return true;
