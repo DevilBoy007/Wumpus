@@ -16,13 +16,13 @@ public class Wumpus extends Rooms{
         if (x.isAdj(krabs))
             System.out.println("Room " + krabs + " reeks of Krabs and his money");
         if (x.isAdj(jelly1))
-            System.out.println("There's a faint buzzing coming from room " + jelly1);
+            System.out.println("There's a faint buzzing coming from Location " + jelly1);
         if (x.isAdj(jelly2))
-            System.out.println("There's a faint buzzing coming from room " + jelly2);
+            System.out.println("There's a faint buzzing coming from Location " + jelly2);
         if (x.isAdj(rockbot1))
-            System.out.println("You hear the distant sound of tongue raspberries from Room " + rockbot1);
+            System.out.println("You hear the distant sound of tongue raspberries from Location " + rockbot1);
         if (x.isAdj(rockbot2))
-            System.out.println("You hear the distant sound of tongue raspberries from Room " + rockbot2);
+            System.out.println("You hear the distant sound of tongue raspberries from Location " + rockbot2);
     }
 
     static int move(Rooms[] a,int x, int y){
@@ -144,14 +144,14 @@ public class Wumpus extends Rooms{
                 "DESTROY Krabs and take the Krabby Patty Formula,\nbut it only has enough energy for 3 uses.");
         while(isPlaying) {
             System.out.println("You have " + arrows + " charges left.");
-            System.out.println("You are in room " + roomDetails[room - 1].getNum() + ".\n");
+            System.out.println("You are in location " + roomDetails[room - 1].getNum() + ".\n");
             System.out.println(roomDetails[room - 1].getText());
-            System.out.println("There are tunnels leading to rooms " + roomDetails[room - 1].getAdj1() + ", " + roomDetails[room - 1].getAdj2() + ", and " + roomDetails[room - 1].getAdj3());
+            System.out.println("There are tunnels leading to locations " + roomDetails[room - 1].getAdj1() + ", " + roomDetails[room - 1].getAdj2() + ", and " + roomDetails[room - 1].getAdj3());
             dangerous(roomDetails[room - 1], wumpusRoom, spiderRoom, spiderRoomTwo, darkPit, darkPitTwo);
             System.out.println("You can (m)ove or (s)hoot\nWhat would you like to do?");
             user = cin.next();
             if (user.equalsIgnoreCase("m")) {
-                System.out.println("Which room would you like to move to?");
+                System.out.println("Which location would you like to move to?");
                 nextRoom = cin.nextInt();
                 room = move(roomDetails,room, nextRoom);
                 isPlaying=isSafe(hazardRooms, roomDetails[room-1]);
@@ -159,16 +159,15 @@ public class Wumpus extends Rooms{
             else if(user.equalsIgnoreCase("s")){
                 if(arrows>0) {
                     arrows--;
-                    System.out.println("Which room would you like to shoot into?");
+                    System.out.println("Which location would you like to shoot into?");
                     System.out.println(roomDetails[room - 1].getAdj1() + " " + roomDetails[room - 1].getAdj2() + " " + roomDetails[room - 1].getAdj3());
                     nextRoom = cin.nextInt();
                     if (!(roomDetails[room - 1].isAdj(nextRoom)))
-                        System.out.println("You can only shoot into rooms that you are next to... obviously");
+                        System.out.println("You can only shoot into locations that you are next to... obviously");
                     else
                         isPlaying = shoot(wumpusRoom, nextRoom);
                 }
-               else System.out.println("The weapon's out of energy!!");
+                else System.out.println("The weapon's out of energy!!");
             }
         }
     }
-}
