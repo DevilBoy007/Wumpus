@@ -11,17 +11,18 @@ public class Wumpus extends Rooms{
          */
     }
 
-    static void dangerous(Rooms x, int a, int b, int c, int d, int e){
-        if (x.isAdj(a))
-            System.out.println("Room " + a + " reeks of Krabs and his money");
-        if (x.isAdj(b))
-            System.out.println("There's a faint buzzing coming from room " + b);
-        if (x.isAdj(c))
-            System.out.println("There's a faint buzzing coming from room " + c);
-        if (x.isAdj(d))
-            System.out.println("You hear the distant sound of tongue raspberries from Room " + d);
-        if (x.isAdj(e))
-            System.out.println("You hear the distant sound of tongue raspberries from Room " + e);
+    static void dangerous(Rooms x, int krabs, int jelly1, int jelly2, int rockbot1, int rockbot2){
+        System.out.println(" ");
+        if (x.isAdj(krabs))
+            System.out.println("Room " + krabs + " reeks of Krabs and his money");
+        if (x.isAdj(jelly1))
+            System.out.println("There's a faint buzzing coming from room " + jelly1);
+        if (x.isAdj(jelly2))
+            System.out.println("There's a faint buzzing coming from room " + jelly2);
+        if (x.isAdj(rockbot1))
+            System.out.println("You hear the distant sound of tongue raspberries from Room " + rockbot1);
+        if (x.isAdj(rockbot2))
+            System.out.println("You hear the distant sound of tongue raspberries from Room " + rockbot2);
     }
 
     static int move(Rooms[] a,int x, int y){
@@ -90,18 +91,17 @@ public class Wumpus extends Rooms{
         return secondPit;
     }
 
-    static boolean isSafe(int [] hazardRooms, int currentRoom){
+    static boolean isSafe(int [] hazardRooms, Rooms currentRoom){
         //for(int i=0;i<hazardRooms.length;i++)
-        System.out.println(" ");
-        if((currentRoom-1)==hazardRooms[0])
+        if(currentRoom.getNum()==hazardRooms[0])
         {System.out.println("Eugene heard you fumbling around beneath him and stepped on you like the vermin you are.");
             return false;
         }
-        if((currentRoom-1)==hazardRooms[1]||(currentRoom-1)==hazardRooms[2])
+        if(currentRoom.getNum()==hazardRooms[1]||currentRoom.getNum()==hazardRooms[2])
         {System.out.println("You walked into a room full of jellyfish and got electrecuted.. underwater.. imagine that");
             return false;
         }
-        if((currentRoom-1)==hazardRooms[3]||(currentRoom-1)==hazardRooms[4])
+        if(currentRoom.getNum()==hazardRooms[3]||currentRoom.getNum()==hazardRooms[4])
         {System.out.println("You *pfft* fell *pfft* into *pfft* Rock *pfft* Bottom, *pfft* next *pfft* bus *pfft* leaves *pfft* never *pfft*");
             return false;
         }
@@ -159,7 +159,7 @@ public class Wumpus extends Rooms{
                 System.out.println("Which room would you like to move to?");
                 nextRoom = cin.nextInt();
                 room = move(roomDetails,room, nextRoom);
-                isPlaying=isSafe(hazardRooms, room);
+                isPlaying=isSafe(hazardRooms, roomDetails[room-1]);
             }
             else if(user.equalsIgnoreCase("s")){
                 if(arrows>0) {
