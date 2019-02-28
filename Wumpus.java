@@ -97,16 +97,16 @@ public class Wumpus extends Rooms{
         {System.out.println("Eugene heard you fumbling around beneath him and stepped on you like the vermin you are.");
             return false;
         }
-        if(currentRoom.getNum()==hazardRooms[1]||currentRoom.getNum()==hazardRooms[2])
+        else if(currentRoom.getNum()==hazardRooms[1]||currentRoom.getNum()==hazardRooms[2])
         {System.out.println("You walked into a room full of jellyfish and got electrecuted.. underwater.. imagine that");
             return false;
         }
-        if(currentRoom.getNum()==hazardRooms[3]||currentRoom.getNum()==hazardRooms[4])
+        else if(currentRoom.getNum()==hazardRooms[3]||currentRoom.getNum()==hazardRooms[4])
         {System.out.println("You *pfft* fell *pfft* into *pfft* Rock *pfft* Bottom, *pfft* next *pfft* bus *pfft* leaves *pfft* never *pfft*");
             return false;
         }
 
-        return true;
+        else return true;
 
     }
     //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
@@ -135,11 +135,6 @@ public class Wumpus extends Rooms{
         int darkPit=darkPit();
         int darkPitTwo = darkPitTwo();
         String user;
-        wumpusRoom();
-        spiderRoom();
-        spiderRoomTwo();
-        darkPit();
-        darkPitTwo();
         boolean isPlaying=true;
         System.out.println("Mr. Krabs has led Bikini Bottom's restaurant scene for too long.");
         System.out.println("You, Sheldon Plankton, must locate and defeat Krabs and claim the formula!\n");
@@ -172,7 +167,7 @@ public class Wumpus extends Rooms{
                     else
                         isPlaying = shoot(wumpusRoom, nextRoom);
                 }
-                System.out.println("The weapon's out of energy!!");
+               else System.out.println("The weapon's out of energy!!");
             }
         }
     }
