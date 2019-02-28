@@ -12,15 +12,18 @@ public class Wumpus extends Rooms{
     }
 
     static void dangerous(Rooms x, int a, int b, int c, int d, int e){
-        if (x.isAdj(a)) System.out.println("Room " + a + " reeks of Krabs and his money");
-        if (x.isAdj(b)) System.out.println("There's a faint buzzing coming from " +
-                "room " + b);
-        if (x.isAdj(c)) System.out.println("There's a faint buzzing coming from " +
-                "room " + c);
-        if (x.isAdj(d)) System.out.println("You hear the distant sound of tongue raspberries from Room " + d);
-        if (x.isAdj(e)) System.out.println("You hear the distant sound of tongue raspberries from Room " + e);
+        if (x.isAdj(a))
+            System.out.println("Room " + a + " reeks of Krabs and his money");
+        if (x.isAdj(b))
+            System.out.println("There's a faint buzzing coming from room " + b);
+        if (x.isAdj(c))
+            System.out.println("There's a faint buzzing coming from room " + c);
+        if (x.isAdj(d))
+            System.out.println("You hear the distant sound of tongue raspberries from Room " + d);
+        if (x.isAdj(e))
+            System.out.println("You hear the distant sound of tongue raspberries from Room " + e);
     }
-   
+
     static int move(Rooms[] a,int x, int y){
         if (y == a[x - 1].getAdj1())
             return y;
@@ -28,87 +31,87 @@ public class Wumpus extends Rooms{
             return y;
         else if (y == a[x - 1].getAdj3())
             return y;
-        else {System.out.println("You can only get to rooms through the connecting tunnels\n"); return x;}
+        else {System.out.println("You can only get to different areas in Bikini Bottom through the connecting tunnels\n"); return x;}
     }
 
     static boolean shoot(int wump, int target){
-	    if(target==wump){
-		    System.out.println("Congratulations!! You finally beat Krabs and have the Krabby Patty Formula");
-		    System.out.println("The Chum Bucket has become the most popular restaurant in Bikini Bottom");
-		    return false;
-	    }
-		    else System.out.println("You hit nothing."); return true;
+        if(target==wump){
+            System.out.println("Ravioli! Ravioli! You got the formuoli!");
+            System.out.println("The Chum Bucket has become the most popular restaurant in Bikini Bottom");
+            return false;
+        }
+        else System.out.println("You hit nothing."); return true;
     }
-	
-   static boolean isRepeating(int[] a, int x){
-	   for(int i = 0; i<a.length; i++){
-		   if(x==a[i])
-			   return true;
-	   }
-		   return false;
-	}
-   static int [] hazardRooms=new int[5];	
-	
+
+    static boolean isRepeating(int[] a, int x){
+        for(int i = 0; i<a.length; i++){
+            if(x==a[i])
+                return true;
+        }
+        return false;
+    }
+    static int [] hazardRooms=new int[5];
+
     static int wumpusRoom() {
         int wumpusRoom = (int) (2 + (8 * Math.random()));
-	    hazardRooms[0]=wumpusRoom;
+        hazardRooms[0]=wumpusRoom;
         return wumpusRoom;
     }
 
     static int spiderRoom() {
         int spiders = (int) (2 + (8 * Math.random()));
-	    while(isRepeating(hazardRooms, spiders))
-		{spiders = (int) (2 + (8 * Math.random()));}
-	hazardRooms[1]=spiders;
+        while(isRepeating(hazardRooms, spiders))
+        {spiders = (int) (2 + (8 * Math.random()));}
+        hazardRooms[1]=spiders;
         return spiders;
     }
 
     static int spiderRoomTwo() {
         int secondSpiders = (int) (2 + (8 * Math.random()));
-	     while(isRepeating(hazardRooms, secondSpiders))
-		    {secondSpiders = (int) (2 + (8 * Math.random()));}
-	hazardRooms[2]=secondSpiders;
+        while(isRepeating(hazardRooms, secondSpiders))
+        {secondSpiders = (int) (2 + (8 * Math.random()));}
+        hazardRooms[2]=secondSpiders;
         return secondSpiders;
     }
 
     static int darkPit() {
         int pit = (int) (2 + (8 * Math.random()));
-	    while(isRepeating(hazardRooms, pit))
-		    {pit = (int) (2 + (8 * Math.random()));}
-	hazardRooms[3]=pit;
+        while(isRepeating(hazardRooms, pit))
+        {pit = (int) (2 + (8 * Math.random()));}
+        hazardRooms[3]=pit;
         return pit;
     }
 
     static int darkPitTwo() {
         int secondPit = (int) (2 + (8 * Math.random()));
-	     while(isRepeating(hazardRooms, secondPit))
-		   {secondPit = (int) (2 + (8 * Math.random()));}
-	hazardRooms[4]=secondPit;
+        while(isRepeating(hazardRooms, secondPit))
+        {secondPit = (int) (2 + (8 * Math.random()));}
+        hazardRooms[4]=secondPit;
         return secondPit;
     }
 
-    static boolean isSafe(int [] hazardRooms, int currentRoom, boolean playing){
-    	//for(int i=0;i<hazardRooms.length;i++)
-    	System.out.println(" ");
-    	if(currentRoom==hazardRooms[0])
-    	{System.out.println("Eugene heard you fumbling around beneath him and stepped on you like the vermin you are.");
-    		playing = false;
-    	}
-    	if(currentRoom==hazardRooms[1]||currentRoom==hazardRooms[2])
-    	{System.out.println("You walked into a room full of jellyfish and got electrecuted.. underwater.. imagine that");
-    		playing = false;
-    	}
-    	if(currentRoom==hazardRooms[3]||currentRoom==hazardRooms[4])
-    	{System.out.println("You *pfft* fell *pfft* into *pfft* Rock *pfft* Bottom, *pfft* next *pfft* bus *pfft* leaves *pfft* never *pfft*");
-    		playing = false;
-    	}
-    	
-    	return playing;
-    	
+    static boolean isSafe(int [] hazardRooms, int currentRoom){
+        //for(int i=0;i<hazardRooms.length;i++)
+        System.out.println(" ");
+        if((currentRoom-1)==hazardRooms[0])
+        {System.out.println("Eugene heard you fumbling around beneath him and stepped on you like the vermin you are.");
+            return false;
+        }
+        if((currentRoom-1)==hazardRooms[1]||(currentRoom-1)==hazardRooms[2])
+        {System.out.println("You walked into a room full of jellyfish and got electrecuted.. underwater.. imagine that");
+            return false;
+        }
+        if((currentRoom-1)==hazardRooms[3]||(currentRoom-1)==hazardRooms[4])
+        {System.out.println("You *pfft* fell *pfft* into *pfft* Rock *pfft* Bottom, *pfft* next *pfft* bus *pfft* leaves *pfft* never *pfft*");
+            return false;
+        }
+
+        return true;
+
     }
-        //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
-      
-      
+    //  return(x.getNum()!=a&&x.getNum()!=b&&x.getNum()!=c&&x.getNum()!=d&&x.getNum()!=e);
+
+
     public static void main(String[] args) throws IOException{
 
         Scanner cin = new Scanner(System.in);
@@ -138,11 +141,13 @@ public class Wumpus extends Rooms{
         darkPit();
         darkPitTwo();
         boolean isPlaying=true;
-		System.out.println("Mr Krabs has led Bikini Bottom's restaurant scene for too long,");
-		System.out.println("You, Sheldon Plankton, must locate and defeat Krabs and claim the formula!\n");
-		System.out.println("You have created a special weapon that will finally allow you to " +
+        System.out.println("Mr. Krabs has led Bikini Bottom's restaurant scene for too long.");
+        System.out.println("You, Sheldon Plankton, must locate and defeat Krabs and claim the formula!\n");
+        System.out.print("An Alaskan Bull Worm has conveniently dug tunnels to various locations ");
+        System.out.println("beneath Bikini Bottom; Use these to locate Krabs.");
+        System.out.println("You have created a special weapon that will finally allow you to " +
                 "DESTROY Krabs and take the Krabby Patty Formula,\nbut it only has enough energy for 3 uses.");
-		while(isPlaying) {
+        while(isPlaying) {
             System.out.println("You have " + arrows + " charges left.");
             System.out.println("You are in room " + roomDetails[room - 1].getNum() + ".\n");
             System.out.println(roomDetails[room - 1].getText());
@@ -154,21 +159,21 @@ public class Wumpus extends Rooms{
                 System.out.println("Which room would you like to move to?");
                 nextRoom = cin.nextInt();
                 room = move(roomDetails,room, nextRoom);
-                isPlaying=isSafe(hazardRooms, room, isPlaying);
+                isPlaying=isSafe(hazardRooms, room);
             }
             else if(user.equalsIgnoreCase("s")){
-		    if(arrows==0)
-		System.out.println("The weapon's out of energy!!");
-		else
-			arrows--;
-			System.out.println("Which room would you like to shoot into?");
-			System.out.println(roomDetails[room-1].getAdj1() + " " + roomDetails[room-1].getAdj2() + " " + roomDetails[room-1].getAdj3());
-		    nextRoom=cin.nextInt();
-		    if(!(roomDetails[room-1].isAdj(nextRoom)))
-			    System.out.println("You can only shoot into rooms that you are next to... obviously");
-		    else
-                	isPlaying = shoot(wumpusRoom, nextRoom);
+                if(arrows>0) {
+                    arrows--;
+                    System.out.println("Which room would you like to shoot into?");
+                    System.out.println(roomDetails[room - 1].getAdj1() + " " + roomDetails[room - 1].getAdj2() + " " + roomDetails[room - 1].getAdj3());
+                    nextRoom = cin.nextInt();
+                    if (!(roomDetails[room - 1].isAdj(nextRoom)))
+                        System.out.println("You can only shoot into rooms that you are next to... obviously");
+                    else
+                        isPlaying = shoot(wumpusRoom, nextRoom);
+                }
+                System.out.println("The weapon's out of energy!!");
+            }
         }
-		}
     }
 }
