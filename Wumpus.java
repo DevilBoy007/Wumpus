@@ -52,7 +52,19 @@ public class Wumpus extends Rooms{
         }
         return false;
     }
-    static int [] hazardRooms=new int[5];
+    static int [] hazardRooms=new int[6];
+    
+    static int ammoRoom(){
+        int ammoRoom = (int)(2+(8*Math.random()));
+        while(isRepeating(hazardRooms, ammoRoom)){
+            ammoRoom = (int)(2+(8*Math.random()));
+        }
+              hazardRooms[5]=ammoRoom;
+        return ammoRoom;
+    }
+    static boolean checkAmmo(int room, int ammo){
+        return(room==ammo);
+    }
 
     static int wumpusRoom() {
         int wumpusRoom = (int) (2 + (8 * Math.random()));
@@ -130,6 +142,7 @@ public class Wumpus extends Rooms{
         int room = 1;
         int arrows=3;
         int nextRoom;
+        int ammoRoom=ammoRoom();
         int wumpusRoom=wumpusRoom();
         int spiderRoom=spiderRoom();
         int spiderRoomTwo=spiderRoomTwo();
@@ -143,6 +156,8 @@ public class Wumpus extends Rooms{
         System.out.println("beneath Bikini Bottom; Use these to locate Krabs.");
         System.out.println("You have created a special weapon that will finally allow you to " +
                 "DESTROY Krabs and take the Krabby Patty Formula,\nbut it only has enough energy for 3 uses.");
+        System.out.println("Be careful as you explore! Wild jellyfish have made their homes in certain parts of the tunnel system!");
+        System.out.println("Make sure you're listening for the babbles of Rock Bottom inhabitants.. wouldn't want to fall down there.");
         while(isPlaying) {
             System.out.println("You have " + arrows + " charges left.");
             System.out.println("You are in location " + roomDetails[room - 1].getNum() + ".\n");
@@ -155,6 +170,11 @@ public class Wumpus extends Rooms{
                 System.out.println("Which location would you like to move to?");
                 nextRoom = cin.nextInt();
                 room = move(roomDetails,room, nextRoom);
+                if(checkAmmo(room, ammoRoom)){
+                    System.out.print("Karen has dropped a supply crate full of extra energy for your weapon. Visit this room ");
+                    System.out.println("whenever you need to refill your weapon's energy.");
+                    arrows=3;
+                }
                 isPlaying=isSafe(hazardRooms, roomDetails[room-1]);
             }
             else if(user.equalsIgnoreCase("s")){
@@ -172,3 +192,4 @@ public class Wumpus extends Rooms{
             }
         }
     }
+              }
