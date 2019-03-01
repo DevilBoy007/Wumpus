@@ -53,13 +53,13 @@ public class Wumpus extends Rooms{
         return false;
     }
     static int [] hazardRooms=new int[6];
-    
+
     static int ammoRoom(){
         int ammoRoom = (int)(2+(8*Math.random()));
         while(isRepeating(hazardRooms, ammoRoom)){
             ammoRoom = (int)(2+(8*Math.random()));
         }
-              hazardRooms[5]=ammoRoom;
+        hazardRooms[5]=ammoRoom;
         return ammoRoom;
     }
     static boolean checkAmmo(int room, int ammo){
@@ -160,6 +160,7 @@ public class Wumpus extends Rooms{
         System.out.println("Make sure you're listening for the babbles of Rock Bottom inhabitants.. wouldn't want to fall down there.");
         while(isPlaying) {
             System.out.println("You have " + arrows + " charges left.");
+            System.out.println("There is additional energy in room " + ammoRoom);
             System.out.println("You are in location " + roomDetails[room - 1].getNum() + ".\n");
             System.out.println(roomDetails[room - 1].getText());
             System.out.println("There are tunnels leading to locations " + roomDetails[room - 1].getAdj1() + ", " + roomDetails[room - 1].getAdj2() + ", and " + roomDetails[room - 1].getAdj3());
@@ -175,7 +176,7 @@ public class Wumpus extends Rooms{
                     System.out.println("whenever you need to refill your weapon's energy.");
                     arrows=3;
                 }
-                isPlaying=isSafe(hazardRooms, roomDetails[room-1]);
+                else isPlaying=isSafe(hazardRooms, roomDetails[room-1]);
             }
             else if(user.equalsIgnoreCase("s")){
                 if(arrows>0) {
@@ -192,4 +193,4 @@ public class Wumpus extends Rooms{
             }
         }
     }
-              }
+}
